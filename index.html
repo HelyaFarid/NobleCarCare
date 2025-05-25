@@ -342,7 +342,7 @@
         console.log('Message:', message); // Debugging log
 
             $.ajax({
-                url: "https://noblecarcare.onrender.com/send-email", // Update with your backend endpoint
+                url: "http://localhost:10000/send-email", // Update with your backend endpoint
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({ email, message }),

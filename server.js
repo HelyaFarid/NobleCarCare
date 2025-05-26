@@ -33,7 +33,7 @@ app.post('/send-email', async (req, res) => {
         from: 'info@noblecarcare.net', 
         to: 'info@noblecarcare.net',
         subject: 'Message from Noble Car Care',
-        text: 'This message is from ' + name + '<br/>' + message
+        text: `This message is from ${name}\n${message}`
     };
 
     try {

@@ -38,10 +38,10 @@ app.post('/send-email', async (req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.status(200).send({ success: 'Email sent successfully!' });
+        res.status(200).send({ success: 'Thank you for contacting us! We have received your message and will be in touch shortly.' });
     } catch (error) {
         console.error(error);
-        res.status(500).send({ error: 'Failed to send email.' });
+        res.status(500).send({ error: 'Server error, please try again later' });
     }
 });
 

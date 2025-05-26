@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Noble Car Care</title>
 </head>
 
@@ -35,7 +36,7 @@
     <div class="main contact">
         <div class="contact-form">
             <h2>Contact Us</h2>
-            <form id="contact-form">
+            <form id="contactform">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
     
@@ -79,19 +80,6 @@
             </div>
             </footer-heading>
             <div class="footer-heading footer-4">
-                <h2>Contact Us</h2>
-                <form action="#">
-                    <div class="email">
-                        <div class="text">Email:</div>
-                        <input type="text" required>
-                    </div>
-                    <div class="msg">
-                        <div class="text">Message:</div>
-                        <textarea type="text" cols="25" rows="2"></textarea>
-                    </div>
-                    <div class="btn"><button type="submit">Send</button></div>
-
-                </form>
             </div>
             
 
@@ -108,16 +96,17 @@
     </div>
 <script>
     $(function () {
-        $('#contact-form').on('submit', function (event) {
+        $('#contactform').on('submit', function (event) {
             console.log('Form submitted'); 
             event.preventDefault();
 
-            let email = $('input[name="emailaddress"]').val();
+            let email = $('input[name="email"]').val();
             let name = $('input[name="name"]').val();
-            let message = $('textarea[name="comment"]').val();
+            let message = $('textarea[name="message"]').val();
 
             console.log('Email:', email); 
         console.log('Message:', message); 
+        console.log('Name:', name); 
 
             $.ajax({
                 url: "https://noblecarcare.onrender.com/send-email",
@@ -125,13 +114,14 @@
                 contentType: "application/json",
                 data: JSON.stringify({ email, name, message }),
                 success: function (response) {
-                    alert("Email sent successfully!");
-                    console.log(response);
-                },
-                error: function (error) {
-                    alert("Failed to send email.");
-                    console.log(error);
-                }
+                    $('input[name="name"]').val('');
+                    $('input[name="email"]').val('');
+                    $('textarea[name="message"]').val('');
+                    alert(response.success);
+                    },
+                    error: function (error) {
+                        alert(response.error);
+                    }
             });
         });
     });     

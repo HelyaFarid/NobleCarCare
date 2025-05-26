@@ -336,11 +336,12 @@
             event.preventDefault();
 
             let email = $('input[name="emailaddress"]').val();
-            let name="Footer";
+            let name="Noble Car Care";
             let message = $('textarea[name="comment"]').val();
 
             console.log('Email:', email); 
         console.log('Message:', message); 
+        console.log('Name:', name); 
 
             $.ajax({
                 url: "https://noblecarcare.onrender.com/send-email",
@@ -348,13 +349,13 @@
                 contentType: "application/json",
                 data: JSON.stringify({ email, name, message }),
                 success: function (response) {
-                    alert("Email sent successfully!");
-                    console.log(response);
-                },
-                error: function (error) {
-                    alert("Failed to send email.");
-                    console.log(error);
-                }
+                        $('input[name="email"]').val('');
+                        $('textarea[name="message"]').val('');
+                        alert(response.success);
+                    },
+                    error: function (error) {
+                        alert(response.error);
+                    }
             });
         });
     });     

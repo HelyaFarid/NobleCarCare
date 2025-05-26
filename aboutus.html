@@ -8,49 +8,61 @@
     <link rel="stylesheet" href="style.css">
     <link href="normalaize.css" rel="stylesheet">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Noble Car Care</title>
 </head>
 
 <body>
     <section class="topmenu">
-<nav class="navbar">
-    <div>
-        <a href="index.html"><img src="assets/Lgo.png" style="height: 80px;" ></a>
-    </div>
-    <input type="checkbox" id="check">
-    <label for="check" class="checkbtn">
-      <i class="fas fa-bars"></i>
-    </label>
-    <ul class="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html" style="color: #f12020;">About Us</a></li>
-        <li><a href="services.html">Our Service</a></li>
-        <li><a href="contactus.html">Contact Us</a></li>
-    </ul>
-    
-</nav>
-</section>
+        <nav class="navbar">
+            <div>
+                <a href="index.html"><img src="assets/Lgo.png" style="height: 80px;"></a>
+            </div>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html" style="color: #f12020;">About Us</a></li>
+                <li><a href="services.html">Our Service</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+
+        </nav>
+    </section>
     <div class="main abouts">
-<div class="aboutus-container">
-<img src="assets/about1.jpg" alt="">
-</div>
-<div class="aboutus">
-<div class="about-container">
-    <h2>About Us</h2>
-            <h2>___</h2>
-            <p>
-                At Noble Car Care, convenience meets excellence in car care. Our mission is simple: to provide top-notch mobile car detailing and washing services tailored to your busy lifestyle. Whether you're a professional juggling deadlines, a parent managing countless tasks, a businessperson on the go, or an elderly individual who values hassle-free solutions, we're here to ensure your vehicle looks its best without disrupting your day. With our experienced team and commitment to quality, we bring precision and shine right to your doorstep.
-            </p>
-            <p>
-                We understand that your time is precious, and your vehicle deserves meticulous attention. That's why we focus on delivering exceptional service with a personal touch. Equipped with industry-leading products and techniques, we make car detailing effortless for you. Our goal is to take the stress out of maintaining your vehicle, so you can focus on what matters most. Let us handle the dirty work while you enjoy the clean results—because at Noble car care, your satisfaction drives us forward.
-            </p>
-</div>
-</div>
+        <div class="aboutus-container">
+            <img src="assets/about1.jpg" alt="">
+        </div>
+        <div class="aboutus">
+            <div class="about-container">
+                <h2>About Us</h2>
+                <h2>___</h2>
+                <p>
+                    At Noble Car Care, convenience meets excellence in car care. Our mission is simple: to provide
+                    top-notch mobile car detailing and washing services tailored to your busy lifestyle. Whether you're
+                    a professional juggling deadlines, a parent managing countless tasks, a businessperson on the go, or
+                    an elderly individual who values hassle-free solutions, we're here to ensure your vehicle looks its
+                    best without disrupting your day. With our experienced team and commitment to quality, we bring
+                    precision and shine right to your doorstep.
+                </p>
+                <p>
+                    We understand that your time is precious, and your vehicle deserves meticulous attention. That's why
+                    we focus on delivering exceptional service with a personal touch. Equipped with industry-leading
+                    products and techniques, we make car detailing effortless for you. Our goal is to take the stress
+                    out of maintaining your vehicle, so you can focus on what matters most. Let us handle the dirty work
+                    while you enjoy the clean results—because at Noble car care, your satisfaction drives us forward.
+                </p>
+            </div>
+        </div>
     </div>
-</div>
+    </div>
 
 
     <div class="footer-container">
@@ -82,20 +94,20 @@
             </footer-heading>
             <div class="footer-heading footer-4">
                 <h2>Contact Us</h2>
-                <form action="#">
+                <form id="contact-form">
                     <div class="email">
                         <div class="text">Email:</div>
-                        <input type="text" required>
+                        <input type="text" name="emailaddress" id="emailaddress" required>
                     </div>
                     <div class="msg">
                         <div class="text">Message:</div>
-                        <textarea type="text" cols="25" rows="2"></textarea>
+                        <textarea type="text" name="comment" cols="25" rows="2"></textarea>
                     </div>
                     <div class="btn"><button type="submit">Send</button></div>
 
                 </form>
             </div>
-            
+
 
         </div>
         <div class="bottom">
@@ -108,7 +120,37 @@
             </center>
         </div>
     </div>
+    <script>
+        $(function () {
+            $('#contact-form').on('submit', function (event) {
+                console.log('Form submitted');
+                event.preventDefault();
 
+                let email = $('input[name="emailaddress"]').val();
+                let name = "Noble Car Care";
+                let message = $('textarea[name="comment"]').val();
+
+                console.log('Email:', email);
+                console.log('Message:', message);
+                console.log('Name:', name);
+
+                $.ajax({
+                    url: "https://noblecarcare.onrender.com/send-email",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ email, name, message }),
+                    success: function (response) {
+                        $('input[name="email"]').val('');
+                        $('textarea[name="message"]').val('');
+                        alert(response.success);
+                    },
+                    error: function (error) {
+                        alert(response.error);
+                    }
+                });
+            });
+        });     
+    </script>
 </body>
 
 </html>

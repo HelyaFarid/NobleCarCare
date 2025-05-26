@@ -336,16 +336,17 @@
             event.preventDefault();
 
             let email = $('input[name="emailaddress"]').val();
+            let name="Footer";
             let message = $('textarea[name="comment"]').val();
 
-            console.log('Email:', email); // Debugging log
-        console.log('Message:', message); // Debugging log
+            console.log('Email:', email); 
+        console.log('Message:', message); 
 
             $.ajax({
-                url: "https://noblecarcare.onrender.com/send-email", // Update with your backend endpoint
+                url: "https://noblecarcare.onrender.com/send-email",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify({ email, message }),
+                data: JSON.stringify({ email, name, message }),
                 success: function (response) {
                     alert("Email sent successfully!");
                     console.log(response);
@@ -356,40 +357,8 @@
                 }
             });
         });
-    });
-
-        
-        //$.post("https://noblecarcare.net/test.js", function({email,message}, status){
-           // console.log(data);
-          //  console.log(status);
-      //alert("Data: " + data + "\nStatus: " + status);
-   // });
-        /*$(function () {
-            $('#contact-form').on('submit', function (event) {
-                event.preventDefault();
-
-                let email = $('input[name="emailaddress"]').val(),
-                    message = $('textarea[name="comment"]').val();
-                console.log(email, message);
-
-                $.ajax({
-                    url: "https://noblecarcare.net/test",
-                    type: "POST",
-                    data: {
-                        email,
-                        message
-                    },
-                    dataType: 'json',
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    fail: function (error) {
-                        console.log(error, 'hi');
-                    }
-                });
-            });
-        });*/
-        //send email
+    });     
+            //send email
 
         //animation
         function reveal() {

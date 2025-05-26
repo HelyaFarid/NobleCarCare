@@ -35,7 +35,7 @@
     <div class="main contact">
         <div class="contact-form">
             <h2>Contact Us</h2>
-            <form action="/submit_form" method="post">
+            <form id="contact-form">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
     
@@ -106,7 +106,36 @@
             </center>
         </div>
     </div>
+<script>
+    $(function () {
+        $('#contact-form').on('submit', function (event) {
+            console.log('Form submitted'); 
+            event.preventDefault();
 
+            let email = $('input[name="emailaddress"]').val();
+            let name = $('input[name="name"]').val();
+            let message = $('textarea[name="comment"]').val();
+
+            console.log('Email:', email); 
+        console.log('Message:', message); 
+
+            $.ajax({
+                url: "https://noblecarcare.onrender.com/send-email",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ email, name, message }),
+                success: function (response) {
+                    alert("Email sent successfully!");
+                    console.log(response);
+                },
+                error: function (error) {
+                    alert("Failed to send email.");
+                    console.log(error);
+                }
+            });
+        });
+    });     
+</script>
 </body>
 
 </html>

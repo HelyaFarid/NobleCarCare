@@ -21,12 +21,12 @@ Noble Car Care is a modern, mobile car wash and detailing service website. The s
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/HelyaFarid/NobleCarCare
-   cd noble-car-care
+   cd nobleCarCare
    ```
 
 2. **Install backend dependencies:**
    ```bash
-   npm install
+   npm install express nodemailer body-parser cors dotenv
    ```
 
 3. **Set up environment variables:**
